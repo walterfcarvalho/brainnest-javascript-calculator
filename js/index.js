@@ -5,10 +5,10 @@ let isNewOperation = true;
 
 document.addEventListener('keyup', (event) =>{ 
   let  values = {
-    '+': () => setOperation(event.key),
-    '-': () => setOperation(event.key),
-    '*': () => setOperation(event.key),
-    '/': () => setOperation(event.key), 
+    '+': () => setOperation(event, event.key),
+    '-': () => setOperation(event, event.key),
+    '*': () => setOperation(event, event.key),
+    '/': () => setOperation(event, event.key), 
     ',': () => addKey(','),
     '%': () => divideBy100(),
     'Escape': () => clearDisplay()
