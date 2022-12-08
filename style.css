@@ -9,7 +9,9 @@
   max-width: 400px;
   margin: 10vh auto 0 auto;
   box-shadow: 0px 0px 43px 17px rgba(153,153,153,1);
-  border: 3px solid;
+  border: 5px solid;
+  border-radius: 5px;
+  padding:5px;
 }
 
 #display {
@@ -18,34 +20,27 @@
   height: 70px;
   line-height: 70px;
   padding: 16px 8px;
-  font-size: 50px;
+  font-size: 55px;
   border: 2px solid;
+  border-radius: 5px;
   padding: 5px;
   font-family: verdana;
+  margin:5px;
 }
 
 .btns {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  border-bottom: 1px solid #999;
-  border-left: 1px solid#999;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
   width: 100%;
-  margin: 0px;
 }
 
-.btns > div {
-  border-top: 1px solid #999;
-  border-right: 1px solid#999;
-}
 
 .btn {
   display: flex;
   align-items: center;
   justify-content: center;
   border: 1px solid #999;
-  line-height: 100px;
   text-align: center;
   font-size: 22px;
   cursor: pointer;
@@ -56,11 +51,6 @@
   flex-grow: 1;
 }
 
-.row {
-  display: flex;
-  width: 100%;
-}
-
 .btn:hover {
   background-color: #323330;
   color: white;
@@ -69,6 +59,11 @@
 .large {
  width: 47%;
 }
+
+.select-operation {
+  border: 5px solid;
+}
+
 
 .operator {
   background-color: var(--btn_oper_bg_color);

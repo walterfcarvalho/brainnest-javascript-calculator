@@ -9,32 +9,30 @@
 </head>
 
 <body>
-  <section>
-    <div class="container">
-      <div id="display">
-        <span id="value-display">0</span>
-      </div>
-      <div class="btns">
-        <button id="ac" class="btn operator" onclick="clearDisplay()">AC</button>
-        <button class="btn operator" onclick="tooglePositive()">+/-</button>
-        <button class="btn operator" onclick="divideBy100()">%</button>
-        <button class="btn operator" onclick="setOperation('/')">/</button>
-        <button class="btn" onclick="addKey('7')">7</button>
-        <button class="btn" onclick="addKey('8')">8</button>
-        <button class="btn" onclick="addKey('9')">9</button>
-        <button class="btn operator" onclick="setOperation('*')">*</button>
-        <button class="btn" onclick="addKey('4')">4</button>
-        <button class="btn" onclick="addKey('5')">5</button>
-        <button class="btn" onclick="addKey('6')">6</button>
-        <button class="btn operator" onclick="setOperation('-')">-</button>
-        <button class="btn" onclick="addKey('1')">1</button>
-        <button class="btn" onclick="addKey('2')">2</button>
-        <button class="btn" onclick="addKey('3')">3</button>
-        <button class="btn operator" onclick="setOperation('+')">+</button>
-        <button class="btn large" onclick="addKey('0')">0</button>
-        <button class="btn" onclick="addKey(',')">,</button>
-        <div id="equal" class="btn operator" onclick="setOperation(null)">=</div>
-      </div>
+  <section class="container">
+    <div id="display">
+      <span id="value-display">0</span>
+    </div>
+    <div class="btns">
+      <button id="ac" class="btn operator" onclick="clearDisplay()">AC</button>
+      <button class="btn operator" onclick="tooglePositive()">+/-</button>
+      <button class="btn operator" onclick="divideBy100()">%</button>
+      <button id="/" class="btn operator" onclick="setOperation(event, '/')">/</button>
+      <button class="btn" onclick="addKey('7')">7</button>
+      <button class="btn" onclick="addKey('8')">8</button>
+      <button class="btn" onclick="addKey('9')">9</button>
+      <button id="*" class="btn operator" onclick="setOperation(event, '*')">*</button>
+      <button class="btn" onclick="addKey('4')">4</button>
+      <button class="btn" onclick="addKey('5')">5</button>
+      <button class="btn" onclick="addKey('6')">6</button>
+      <button id="-" class="btn operator" onclick="setOperation(event, '-')">-</button>
+      <button class="btn" onclick="addKey('1')">1</button>
+      <button class="btn" onclick="addKey('2')">2</button>
+      <button class="btn" onclick="addKey('3')">3</button>
+      <button id="+" class="btn operator" onclick="setOperation(event, '+')">+</button>
+      <button class="btn large" onclick="addKey('0')">0</button>
+      <button class="btn" onclick="addKey(',')">,</button>
+      <button id="equal" class="btn operator" onclick="setOperation(null)">=</button>
     </div>
   </section>
 </body>
