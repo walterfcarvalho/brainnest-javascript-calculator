@@ -1,67 +1,75 @@
 class JsCalc {
   constructor(previousOperandTextElement, currentOperandTextElement) {
-    this.previousOperandTextElement = previousOperandTextElement
-    this.currentOperandTextElement = currentOperandTextElement
-    this.clear()
+    this.previousOperandTextElement = previousOperandTextElement;
+    this.currentOperandTextElement = currentOperandTextElement;
+    this.clear();
   }
 
   clear() {
-    this.currentOperand = ''
-    this.previousOperand = ''
-    this.operation = undefined
+    this.currentOperand = '';
+    this.previousOperand = '';
+    this.operation = undefined;
   }
 
   delete() {
-    this.currentOperand = this.currentOperand.toString().slice(0, -1)
+    this.currentOperand = this.currentOperand.toString().slice(0, -1);
   }
 
   appendNumber(number) {
-    if (number === '.' && this.currentOperand.includes('.')) return
-    this.currentOperand = this.currentOperand.toString() + number.toString()
+    if (number === '.' && this.currentOperand.includes('.')) 
+      return
+
+    this.currentOperand = this.currentOperand.toString() + number.toString();
   }
 
   chooseOperation(operation) {
-    if (this.currentOperand === '') return
+    if (this.currentOperand === '') 
+      return
+
     if (this.previousOperand !== '') {
-      this.compute()
+      this.compute();
     }
     
-    this.operation = operation
-    this.previousOperand = this.currentOperand
-    this.currentOperand = ''
+    this.operation = operation;
+    this.previousOperand = this.currentOperand;
+    this.currentOperand = '';
   }
 
   compute() {
-    let computation
-    const prev = parseFloat(this.previousOperand)
-    const current = parseFloat(this.currentOperand)
-    if (isNaN(prev) || isNaN(current)) return
-    switch (this.operation) {
+    let computation;
+    const prev = parseFloat(this.previousOperand);
+    const current = parseFloat(this.currentOperand);
+    
+    if (isNaN(prev) || isNaN(current)) 
+      return
+    
+      switch (this.operation) {
       case '+':
-        computation = prev + current
+        computation = prev + current;
         break
       case '-':
-        computation = prev - current
+        computation = prev - current;
         break
       case '*':
-        computation = prev * current
+        computation = prev * current;
         break
       case ('/'):
-        computation = prev / current
+        computation = prev / current;
         break
       default:
         return
     }
-    this.currentOperand = computation
-    this.operation = undefined
+    this.currentOperand = computation;
+    this.operation = undefined;
     this.previousOperand = ''
   }
 
   getDisplayNumber(number) {
-    const stringNumber = number.toString()
-    const integerDigits = parseFloat(stringNumber.split('.')[0])
-    const decimalDigits = stringNumber.split('.')[1]
-    let integerDisplay
+    const stringNumber = number.toString();
+    const integerDigits = parseFloat(stringNumber.split('.')[0]);
+    const decimalDigits = stringNumber.split('.')[1];
+    let integerDisplay;
+
     if (isNaN(integerDigits)) {
       integerDisplay = ''
     } else {
@@ -109,9 +117,8 @@ const currentOperandTextElement = document.querySelector('.current-operand');
 
 const jsCalc = new JsCalc(previousOperandTextElement, currentOperandTextElement)
 
-numberButtons.forEach(button => {
-  button.addEventListener('click', () => {
-
+numberButtons.forEach( btn => {
+  btn.addEventListener('click', () => {
     if ( Math.abs(jsCalc.currentOperand).toString().length >= 9)
       return
     
@@ -120,70 +127,70 @@ numberButtons.forEach(button => {
   })
 })
 
-operationButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    jsCalc.chooseOperation(button.innerText)
-    jsCalc.updateDisplay()
+operationButtons.forEach( btn => {
+  btn.addEventListener('click', () => {
+    jsCalc.chooseOperation(button.innerText);
+    jsCalc.updateDisplay();
   })
 })
 
-tooglePositiveBtn.addEventListener('click', btn =>{
+tooglePositiveBtn.addEventListener('click', btn => {
   btn.preventDefault();
-  jsCalc.tooglePositive()
+  jsCalc.tooglePositive();
 })
 
-percentBtn.addEventListener('click', btn =>{
+percentBtn.addEventListener('click', btn => {
   btn.preventDefault();
-  jsCalc.setPercent()
+  jsCalc.setPercent();
 })
 
 equalsBtn.addEventListener('click', btn => {
-  jsCalc.compute()
-  jsCalc.updateDisplay()
+  jsCalc.compute();
+  jsCalc.updateDisplay();
 })
 
 allClearButton.addEventListener('click', btn => {
-  jsCalc.clear()
-  jsCalc.updateDisplay()
+  jsCalc.clear();
+  jsCalc.updateDisplay();
 })
 
-document.addEventListener('keydown', function (event) {
+document.addEventListener('keydown', event => {
   let patternForNumbers = /[0-9]/g;
   let patternForOperators = /[+\-*\/]/g
   if (event.key.match(patternForNumbers)) {
     event.preventDefault();
-    jsCalc.appendNumber(event.key)
-    jsCalc.updateDisplay()
+    jsCalc.appendNumber(event.key);
+    jsCalc.updateDisplay();
   }
   if (event.key === '.') {
     event.preventDefault();
-    jsCalc.appendNumber(event.key)
-    jsCalc.updateDisplay()
+    jsCalc.appendNumber(event.key);
+    jsCalc.updateDisplay();
   }
   if (event.key.match(patternForOperators)) {
     event.preventDefault();
-    jsCalc.chooseOperation(event.key)
+    jsCalc.chooseOperation(event.key);
     jsCalc.updateDisplay()
   }
   if (event.key === 'Enter' || event.key === '=') {
     event.preventDefault();
-    jsCalc.compute()
-    jsCalc.updateDisplay()
+    jsCalc.compute();
+    jsCalc.updateDisplay();
   }
   if (event.key === "Backspace") {
     event.preventDefault();
-    jsCalc.delete()
-    jsCalc.updateDisplay()
+    jsCalc.delete();
+    jsCalc.updateDisplay();
   }
   if (event.key == 'Delete') {
     event.preventDefault();
-    jsCalc.clear()
+    jsCalc.clear();
     jsCalc.updateDisplay()
   }
 
   if (event.dkey == 'Escape') {
     event.preventDefault();
-    jsCalc.clear()
+    jsCalc.clear();
     jsCalc.updateDisplay()
   }
 
