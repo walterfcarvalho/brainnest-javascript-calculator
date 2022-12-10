@@ -1,29 +1,29 @@
 class JsCalc {
-  constructor(previousOperandTextElement, currentOperandTextElement) {
-    this.previousOperandTextElement = previousOperandTextElement;
-    this.currentOperandTextElement = currentOperandTextElement;
+  constructor(prevOpTextElement, currOpHmtlElement) {
+    this.prevOpTextElement = prevOpTextElement;
+    this.currOpHmtlElement = currOpHmtlElement;
     this.clear();
   }
 
   clear() {
-    this.currentOperand = '';
+    this.currentOp = '';
     this.previousOperand = '';
     this.operation = undefined;
   }
 
   delete() {
-    this.currentOperand = this.currentOperand.toString().slice(0, -1);
+    this.currentOp = this.currentOp.toString().slice(0, -1);
   }
 
   appendNumber(number) {
-    if (number === '.' && this.currentOperand.includes('.')) 
+    if (number === '.' && this.currentOp.includes('.')) 
       return
 
-    this.currentOperand = this.currentOperand.toString() + number.toString();
+    this.currentOp = this.currentOp.toString() + number.toString();
   }
 
   chooseOperation(operation) {
-    if (this.currentOperand === '') 
+    if (this.currentOp === '') 
       return
 
     if (this.previousOperand !== '') {
@@ -31,35 +31,25 @@ class JsCalc {
     }
     
     this.operation = operation;
-    this.previousOperand = this.currentOperand;
-    this.currentOperand = '';
+    this.previousOperand = this.currentOp;
+    this.currentOp = '';
   }
 
   compute() {
-    let computation;
+    let result;
     const prev = parseFloat(this.previousOperand);
-    const current = parseFloat(this.currentOperand);
+    const current = parseFloat(this.currentOp);
     
     if (isNaN(prev) || isNaN(current)) 
       return
     
-      switch (this.operation) {
-      case '+':
-        computation = prev + current;
-        break
-      case '-':
-        computation = prev - current;
-        break
-      case '*':
-        computation = prev * current;
-        break
-      case ('/'):
-        computation = prev / current;
-        break
-      default:
-        return
+    let opcs = {
+      '+': () => prev + current,
+      '-': () => prev - current,
+      '*': () => prev * current,
+      '/': () => prev / current
     }
-    this.currentOperand = computation;
+    this.currentOp = opcs[this.operation]();
     this.operation = undefined;
     this.previousOperand = ''
   }
@@ -83,25 +73,30 @@ class JsCalc {
   }
 
   updateDisplay() {
-    this.currentOperandTextElement.innerText =
-      this.getDisplayNumber(this.currentOperand) + " "
+    this.currOpHmtlElement.innerText =
+      this.getDisplayNumber(this.currentOp) + " "
     if (this.operation != null) {
-      this.previousOperandTextElement.innerText =
+      this.prevOpTextElement.innerText =
         `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`
     } else {
-      this.previousOperandTextElement.innerText = ''
+      this.prevOpTextElement.innerText = ''
     }
   }
 
   tooglePositive() {
-    let aux = parseFloat(this.currentOperand) * -1;
-    this.currentOperand = aux.toString();
+    let aux = parseFloat(this.currentOp) * -1;
+    this.currentOp = aux.toString();
     this.updateDisplay();
   }
 
   setPercent() {
-    let aux = parseFloat(this.currentOperand) / 100;
-    this.currentOperand = aux.toString();
+    let aux = parseFloat(this.currentOp) / 100;
+    
+    aux = (aux > 0) 
+      ? aux.toString().slice(0,11)
+      : aux.toString().slice(0,12)
+
+    this.currentOp = aux;
     this.updateDisplay();
   }
 }
@@ -112,24 +107,24 @@ const equalsBtn = document.querySelector('.opEquals');
 const percentBtn = document.querySelector('.opPercent');
 const allClearButton = document.querySelector('.AC');
 const tooglePositiveBtn = document.querySelector('.tooglePositive');
-const previousOperandTextElement = document.querySelector('.previous-operand');
-const currentOperandTextElement = document.querySelector('.current-operand');
+const prevOpTextElement = document.querySelector('.previous-operand');
+const currOpHmtlElement = document.querySelector('.current-operand');
 
-const jsCalc = new JsCalc(previousOperandTextElement, currentOperandTextElement)
+const jsCalc = new JsCalc(prevOpTextElement, currOpHmtlElement);
 
 numberButtons.forEach( btn => {
   btn.addEventListener('click', () => {
-    if ( Math.abs(jsCalc.currentOperand).toString().length >= 9)
+    if ( Math.abs(jsCalc.currentOp).toString().length >= 9)
       return
     
-    jsCalc.appendNumber(button.innerText)
+    jsCalc.appendNumber(btn.innerText)
     jsCalc.updateDisplay()
   })
 })
 
 operationButtons.forEach( btn => {
   btn.addEventListener('click', () => {
-    jsCalc.chooseOperation(button.innerText);
+    jsCalc.chooseOperation(btn.innerText);
     jsCalc.updateDisplay();
   })
 })
@@ -155,9 +150,9 @@ allClearButton.addEventListener('click', btn => {
 })
 
 document.addEventListener('keydown', event => {
-  let patternForNumbers = /[0-9]/g;
-  let patternForOperators = /[+\-*\/]/g
-  if (event.key.match(patternForNumbers)) {
+  let regOperators = /[+\-*\/]/g
+  let regNumbers = /[0-9]/g;
+  if (event.key.match(regNumbers)) {
     event.preventDefault();
     jsCalc.appendNumber(event.key);
     jsCalc.updateDisplay();
@@ -167,7 +162,7 @@ document.addEventListener('keydown', event => {
     jsCalc.appendNumber(event.key);
     jsCalc.updateDisplay();
   }
-  if (event.key.match(patternForOperators)) {
+  if (event.key.match(regOperators)) {
     event.preventDefault();
     jsCalc.chooseOperation(event.key);
     jsCalc.updateDisplay()
