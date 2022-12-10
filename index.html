@@ -3,36 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Calculator</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>04 JS assignment 02</title>
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
   <link rel="stylesheet" href="style.css">
-  <script src="js/index.js" referrerpolicy="refer"></script>
+  <script src="js/script.js" defer></script>
 </head>
 
 <body>
   <section class="container">
     <div id="display">
-      <span id="value-display">0</span>
+      <span class="previous-operand"> </span>
+      <span class="current-operand"> </span>
     </div>
     <div class="btns">
-      <button id="ac" class="btn operator" onclick="clearDisplay()">AC</button>
-      <button class="btn operator" onclick="tooglePositive()">+/-</button>
-      <button class="btn operator" onclick="divideBy100()">%</button>
-      <button id="/" class="btn operator" onclick="setOperation(event, '/')">/</button>
-      <button class="btn" onclick="addKey('7')">7</button>
-      <button class="btn" onclick="addKey('8')">8</button>
-      <button class="btn" onclick="addKey('9')">9</button>
-      <button id="*" class="btn operator" onclick="setOperation(event, '*')">*</button>
-      <button class="btn" onclick="addKey('4')">4</button>
-      <button class="btn" onclick="addKey('5')">5</button>
-      <button class="btn" onclick="addKey('6')">6</button>
-      <button id="-" class="btn operator" onclick="setOperation(event, '-')">-</button>
-      <button class="btn" onclick="addKey('1')">1</button>
-      <button class="btn" onclick="addKey('2')">2</button>
-      <button class="btn" onclick="addKey('3')">3</button>
-      <button id="+" class="btn operator" onclick="setOperation(event, '+')">+</button>
-      <button class="btn large" onclick="addKey('0')">0</button>
-      <button class="btn" onclick="addKey(',')">,</button>
-      <button id="equal" class="btn operator" onclick="setOperation(null)">=</button>
+      <button id="ac" class="btn opBtn AC" >AC</button>
+      <button class="btn opBtn tooglePositive">+/-</button>
+      <button class="btn opBtn operator opPercent">%</button>
+      <button id="/" class="btn opBtn operation">/</button>
+      <button class="btn numbers" >7</button>
+      <button class="btn numbers" >8</button>
+      <button class="btn numbers" >9</button>
+      <button id="*" class="btn opBtn operation" >*</button>
+      <button class="btn numbers" >4</button>
+      <button class="btn numbers" >5</button>
+      <button class="btn numbers" >6</button>
+      <button id="-" class="btn opBtn operation" >-</button>
+      <button class="btn numbers" >1</button>
+      <button class="btn numbers" >2</button>
+      <button class="btn numbers" >3</button>
+      <button id="+" class="btn opBtn operation" >+</button>
+      <button class="btn large">0</button>
+      <button class="btn numbers">.</button>
+      <button class="btn opBtn opEquals">=</button>
     </div>
   </section>
 </body>
