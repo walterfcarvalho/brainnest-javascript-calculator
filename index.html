@@ -5,13 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>04 JS assignment 02</title>
-  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+  <link rel="icon" type="image/x-icon" href="images/logo.png">
   <link rel="stylesheet" href="style.css">
   <script src="js/script.js" defer></script>
 </head>
 
 <body>
   <section class="container">
+    <div class="title-bar">
+      <div class="title-bar-cell">
+        <img src="images/logo.png" alt="Logo calculator"/>
+        <span>Calculator</span>
+      </div>
+      
+      <div class="title-bar-cell">
+        <button class="title-button">_</button>
+        <button class="title-button">
+          <img src="images/disabled.png" alt="image maximize minimize">
+        </button>
+        <button class="title-button">x</button>
+      </div>
+    </div>
+    
+    <div title >
+      <button class="menu-btn"> <span>E</span>dit</button>
+      <button class="menu-btn"> <span>V</span>iew</button>
+      <button class="menu-btn"> <span>H</span>elp</button>
+    </div>
+
+    <hr>
     <div id="display">
       <span class="previous-operand"> </span>
       <span class="current-operand"> </span>
