@@ -73,8 +73,8 @@ class JsCalc {
   }
 
   updateDisplay() {
-    this.currOpHmtlElement.innerText =
-      this.getDisplayNumber(this.currentOp) + " "
+    this.currOpHmtlElement.innerText = (this.getDisplayNumber(this.currentOp)).slice(0,10) + " "
+
     if (this.operation != null) {
       this.prevOpTextElement.innerText =
         `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`
