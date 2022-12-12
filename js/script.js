@@ -1,8 +1,13 @@
 class JsCalc {
   constructor(prevOpTextElement, currOpHmtlElement) {
+    this.lastDigit = '';
     this.prevOpTextElement = prevOpTextElement;
     this.currOpHmtlElement = currOpHmtlElement;
     this.clear();
+  }
+
+  setLastDigit(type) {
+    this.lastDigit(type)
   }
 
   clear() {
@@ -74,6 +79,12 @@ class JsCalc {
 
   updateDisplay() {
     this.currOpHmtlElement.innerText = (this.getDisplayNumber(this.currentOp)).slice(0,11) + " "
+
+    if (this.currOpHmtlElement.innerText == '∞'){
+      this.currOpHmtlElement.innerText = 'Infinity';
+      this.currentOp = 0;
+    }
+
 
     if (this.operation != null) {
       this.prevOpTextElement.innerText =
@@ -155,6 +166,7 @@ document.addEventListener('keydown', event => {
   if (event.key.match(regNumbers)) {
     event.preventDefault();
     jsCalc.appendNumber(event.key);
+    jsCalc.setLastDigit('d');
     jsCalc.updateDisplay();
   }
   if (event.key === '.') {
@@ -164,11 +176,13 @@ document.addEventListener('keydown', event => {
   }
   if (event.key.match(regOperators)) {
     event.preventDefault();
+    jsCalc.setLastDigit('d');
     jsCalc.chooseOperation(event.key);
     jsCalc.updateDisplay()
   }
   if (event.key === 'Enter' || event.key === '=') {
     event.preventDefault();
+
     jsCalc.compute();
     jsCalc.updateDisplay();
   }
