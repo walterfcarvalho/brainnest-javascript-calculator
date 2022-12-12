@@ -73,11 +73,11 @@ class JsCalc {
   }
 
   updateDisplay() {
-    this.currOpHmtlElement.innerText = (this.getDisplayNumber(this.currentOp)).slice(0,10) + " "
+    this.currOpHmtlElement.innerText = (this.getDisplayNumber(this.currentOp)).slice(0,11) + " "
 
     if (this.operation != null) {
       this.prevOpTextElement.innerText =
-        `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`
+        `${(this.getDisplayNumber(this.previousOperand)).slice(0,11)} ${this.operation}`
     } else {
       this.prevOpTextElement.innerText = ''
     }
@@ -93,7 +93,7 @@ class JsCalc {
     let aux = parseFloat(this.currentOp) / 100;
     
     aux = (aux > 0) 
-      ? aux.toString().slice(0,11)
+      ? aux.toString().slice(0,10)
       : aux.toString().slice(0,12)
 
     this.currentOp = aux;
